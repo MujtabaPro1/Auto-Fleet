@@ -12,15 +12,21 @@ export default function VideoSection() {
       ctaText: 'Get a Quote'
     },
     {
-      image: '/image-2-full.png',
+      image: '/image-9.png',
       title: 'Full Inspection Reports',
       subtitle: 'Create, edit & maintain full Inspection Reports of any car',
       ctaText: 'View Services'
     },
+    // {
+    //   image: '/image-3.png',
+    //   title: 'Buy, Sell or Trade-In',
+    //   subtitle: 'Maintain optionality. All under one roof',
+    //   ctaText: 'Explore Options'
+    // },
     {
-      image: '/image-3.png',
-      title: 'Buy, Sell or Trade-In',
-      subtitle: 'Maintain optionality. All under one roof',
+      image: '/image-7.png',
+      title: 'AI Car Studio',
+      subtitle: 'AI Powered Car Studio',
       ctaText: 'Explore Options'
     },
   ];
@@ -44,7 +50,7 @@ export default function VideoSection() {
             {serviceItems.map((item, index) => (
               <div key={index} className="rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all flex flex-col">
                 {/* Image container with fixed height */}
-                <div className="relative h-64">
+                <div className="relative h-[20rem]">
                   <img 
                     src={item.image} 
                     alt={`${item.title} showcase`} 
