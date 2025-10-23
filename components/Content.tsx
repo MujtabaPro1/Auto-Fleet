@@ -19,12 +19,8 @@ const ContentSection: React.FC<ContentSectionProps> = ({
   // Function to bold key phrases in the description
   const formatDescription = (text: string) => {
     // Common terms that should be bolded in automotive management platform descriptions
-    const termsToHighlight = [
-      'AI', 'Machine-learning', 'real-time', 'dashboard', 'inventory', 'inspection', 
-      'valuation', 'auction', 'mobile', 'tablet-friendly', 'automated', 'seamless', 
-      'integration', 'workflow', 'analytics', 'reports', 'SEO-ready', 'digital marketing',
-      'multi-branch', 'performance', 'tracking', 'transparency', 'accuracy', 'precision'
-    ];
+   
+    const termsToHighlight: string[] = [];
     
     // Create a regex pattern that matches whole words only
     const pattern = new RegExp(`\\b(${termsToHighlight.join('|')})\\b`, 'gi');

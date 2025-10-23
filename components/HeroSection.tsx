@@ -13,18 +13,17 @@ export default function HeroSection() {
           {/* Left side - Text content */}
           <div className="md:w-[45%] text-left">
             <div className="inline-flex items-center gap-2 px-5 py-3 bg-slate-900 text-white rounded-full text-md font-medium mb-8 shadow-lg">
-              <Sparkles className="h-5 w-5" />
               <span className="text-lg">Automotive Management Platform</span>
             </div>
             
-            <p className="text-xl sm:text-2xl text-slate-600 mb-8 max-w-3xl mx-auto md:mx-0 leading-relaxed">
+            <p className="text-xl text-slate-600 mb-8 max-w-3xl mx-auto md:mx-0 font-light">
               A complete white-label platform for Car Inspections, Appointment Bookings, AI Valuations, Auctions, and Inventory Management — built for scalability across markets.
             </p>
 
           </div>
           
           {/* Right side - App mockup image */}
-          <div className="md:w-[55%] mt-8 md:mt-0">
+          <div className="md:w-[55%] mt-0 lg:mt-8 md:mt-0">
             <div className="relative bg-white p-2 rounded-lg shadow-xl">
               <img 
                 src="https://placehold.co/400x200" 
