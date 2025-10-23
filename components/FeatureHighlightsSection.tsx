@@ -72,15 +72,13 @@ const features = [
 
 export const FeatureHighlightsSection = ({onSelectItem}: {onSelectItem: (index: number) => void}) => {
   return (
-    <section className="py-12 px-4 sm:px-6 lg:px-8 bg-white border-b border-slate-100">
+    <section id="services" className="py-12 px-4 sm:px-6 lg:px-8 bg-white border-b border-slate-100">
       <div className="container mx-auto max-w-7xl">
         <div className="text-center mb-8">
-          <p className="text-xl text-slate-600 max-w-3xl mx-auto">
-            Managing your dealership on the go doesn't get any easier or faster than our fully integrated mobile solution. Oversee your deals, upload inventory, run vehicle history reports, communicate with customers, and more, right from your phone.
-          </p>
+          <h2 className="text-3xl font-bold text-slate-900 mb-4">Explore Our Services</h2>
         </div>
         
-        <div className="relative mt-10">
+        <div className="relative mt-6">
           <div className="flex overflow-x-auto pb-6 snap-x snap-mandatory hide-scrollbar">
             <div className="flex gap-4 px-4 md:px-0 mx-auto">
               {features.map((feature, index) => (
@@ -91,15 +89,14 @@ export const FeatureHighlightsSection = ({onSelectItem}: {onSelectItem: (index: 
                   }}
                   className="flex-none w-[15rem] snap-center cursor-pointer"
                 >
-                  <div className="bg-slate-900 text-white rounded-lg px-6 py-5 h-full flex flex-col items-center justify-center text-center  transition-all duration-300 shadow-md hover:shadow-lg">
+                  <div className="bg-slate-900 text-white rounded-lg px-6 py-5 h-full flex flex-col items-center justify-center text-center transition-all duration-300 shadow-md hover:shadow-xl hover:bg-slate-800 hover:scale-105">
+                    <feature.icon className="h-6 w-6 mb-2" />
                     <div className="font-medium text-sm">{feature.title}</div>
                   </div>
                 </div>
               ))}
             </div>
           </div>
-          
-  
         </div>
       </div>
 

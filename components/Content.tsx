@@ -16,6 +16,32 @@ const ContentSection: React.FC<ContentSectionProps> = ({
   imageUrl,
   onButtonClick,
 }) => {
+  // Function to bold key phrases in the description
+  const formatDescription = (text: string) => {
+    // Common terms that should be bolded in automotive management platform descriptions
+    const termsToHighlight = [
+      'AI', 'Machine-learning', 'real-time', 'dashboard', 'inventory', 'inspection', 
+      'valuation', 'auction', 'mobile', 'tablet-friendly', 'automated', 'seamless', 
+      'integration', 'workflow', 'analytics', 'reports', 'SEO-ready', 'digital marketing',
+      'multi-branch', 'performance', 'tracking', 'transparency', 'accuracy', 'precision'
+    ];
+    
+    // Create a regex pattern that matches whole words only
+    const pattern = new RegExp(`\\b(${termsToHighlight.join('|')})\\b`, 'gi');
+    
+    // Split by the pattern and map to JSX with bold elements
+    const parts = text.split(pattern);
+    const matches = text.match(pattern) || [];
+    
+    return parts.reduce((result: React.ReactNode[], part, i) => {
+      result.push(part);
+      if (i < matches.length) {
+        result.push(<strong key={i} className="font-bold">{matches[i]}</strong>);
+      }
+      return result;
+    }, []);
+  };
+
   return (
     <section className="w-full bg-white py-16 px-4 sm:px-6 lg:px-12 overflow-hidden">
       {/* Title at top - centered on mobile, left-aligned on desktop */}
@@ -31,7 +57,7 @@ const ContentSection: React.FC<ContentSectionProps> = ({
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-8 md:gap-12 lg:gap-16">
         {/* Left - Content */}
         <div className="w-full md:w-1/2 flex flex-col justify-center order-2 md:order-1 mt-8 md:mt-0">
-          <p className="text-gray-700 text-lg mb-8 leading-relaxed">{description}</p>
+          <p className="text-gray-700 text-lg mb-8 leading-relaxed">{formatDescription(description)}</p>
           {buttonText && (
             <div className="mt-2">
               <button
