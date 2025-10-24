@@ -8,24 +8,25 @@ import Footer from '@/components/Footer';
 import ContentSection from '@/components/Content';
 import { useState, useEffect } from 'react';
 import { FeatureHighlightsSection } from '@/components/FeatureHighlightsSection';
+import { Track } from '@radix-ui/react-slider';
 
 const featuresData = [
   {
     title: "Dealer Management System",
     description:
-      "Comprehensive Digital Vehicle Assessment. From minor details to major components, record every aspect of a vehicle's condition with precision. AutoLab's 120-point inspection workflow ensures transparency and speed, powered by photo tagging and automated reporting. Mobile and tablet-friendly interface for on-site inspections. Auto-generated inspection reports with integrated valuation. Easy sharing with sellers, dealers, or third-party clients.",
+      "Manage inventory, staff, leads, and transactions from one unified dashboard. AutoLab’s DMS simplifies day-to-day management so you can focus on scaling your business, not chasing spreadsheets. Track stock, sales, and performance in real time. Assign roles, permissions, and workflows for multi-branch control. Seamless integration with inspections, valuation, and auctions.",
     imageUrl: "https://placehold.co/600x400"
   },
   {
     title: "Vehicle Inspection Suite",
     description:
-      "Instant, Intelligent Market Valuations. AutoLab's proprietary AI valuation engine processes real-time market data, mileage, and condition reports to deliver accurate and transparent car pricing within seconds. Adaptive pricing that learns from your local market trends. Instant trade-in, wholesale, and retail value ranges. Seamless tie-in with inspection and auction modules.",
+      "Comprehensive Digital Vehicle Assessment. From minor details to major components, record every aspect of a vehicle's condition with precision. AutoLab's 120-point inspection workflow ensures transparency and speed, powered by photo tagging and automated reporting. Mobile and tablet-friendly interface for on-site inspections. Auto-generated inspection reports with integrated valuation. Easy sharing with sellers, dealers, or third-party clients.",
     imageUrl: "https://placehold.co/600x400"
   },
   {
     title: "AI Car Valuation Engine",
     description:
-      "Professional Imagery Made Effortless. Transform every listing with consistent, studio-grade photos and 360° vehicle views — all generated straight from your mobile device. AI background removal and auto-lighting correction. Guided capture ensures every photo meets your brand's standard. 360° spin and video exports ready for listings or social media.",
+      "Instant, Intelligent Market Valuations. AutoLab's proprietary AI valuation engine processes real-time market data, mileage, and condition reports to deliver accurate and transparent car pricing within seconds. Adaptive pricing that learns from your local market trends. Instant trade-in, wholesale, and retail value ranges. Seamless tie-in with inspection and auction modules.",
     imageUrl: "https://placehold.co/600x400"
   },
   {
