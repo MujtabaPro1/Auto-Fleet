@@ -7,31 +7,31 @@ export default function VideoSection() {
   const demoVideos = [
     {
       video: '/masking-tech-demo.mp4',
-      thumbnail: 'https://placehold.co/600x400',
+      thumbnail: 'masking.jpeg',
       title: 'Masking Technology',
       description: 'See how our advanced masking technology works to enhance vehicle images'
     },
     {
       video: '/ai-valuation-demo.mp4',
-      thumbnail: 'https://placehold.co/600x400',
+      thumbnail: 'ai.jpeg',
       title: 'AI Valuation',
       description: 'Watch our AI valuation system provide instant, accurate pricing'
     },
     {
       video: '/inspection-module-demo.mp4',
-      thumbnail: 'https://placehold.co/600x400',
+      thumbnail: 'inspection.png',
       title: 'Inspection Module',
       description: 'Explore our comprehensive vehicle inspection process'
     },
     {
       video: '/dashboard-demo.mp4',
-      thumbnail: 'https://placehold.co/600x400',
+      thumbnail: 'dashboard.png',
       title: 'Dashboard Overview',
       description: 'Tour our intuitive management dashboard'
     },
     {
       video: '/mobile-app-demo.mp4',
-      thumbnail: 'https://placehold.co/600x400',
+      thumbnail: 'app.jpeg',
       title: 'Mobile Application',
       description: 'See how our mobile app streamlines operations on the go'
     }
@@ -70,11 +70,11 @@ export default function VideoSection() {
                           className="w-full h-full object-cover" 
                         />
                         <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30 hover:bg-opacity-20 transition-all">
-                          <div className="w-16 h-16 rounded-full bg-white bg-opacity-80 flex items-center justify-center">
+                          {/* <div className="w-16 h-16 rounded-full bg-white bg-opacity-80 flex items-center justify-center">
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-slate-900" viewBox="0 0 20 20" fill="currentColor">
                               <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd" />
                             </svg>
-                          </div>
+                          </div> */}
                         </div>
                       </div>
                       <div className="p-4 bg-white flex-1 flex flex-col">

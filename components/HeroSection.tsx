@@ -24,11 +24,12 @@ export default function HeroSection() {
           
           {/* Right side - App mockup image */}
           <div className="md:w-[55%] mt-0 lg:mt-8 md:mt-0">
-            <div className="relative bg-white p-2 rounded-lg shadow-xl">
+            <div className="relative p-4 rounded-xl">
               <img 
-                src="https://placehold.co/400x200" 
+                src="banner-rembg.png" 
                 alt="Automotive Management Platform Interface" 
-                className="w-full h-auto object-contain"
+                className="w-full h-auto object-contain relative z-10"
+                style={{ mixBlendMode: 'multiply' }}
               />
             </div>
           </div>
