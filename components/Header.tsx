@@ -1,8 +1,9 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
-import { Car } from 'lucide-react';
+import { Car, Menu, X, ChevronRight } from 'lucide-react';
 import { useState, useEffect } from 'react';
+import Link from 'next/link';
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -26,62 +27,86 @@ export default function Header() {
     setMobileMenuOpen(false);
   };
 
+  const navItems = [
+    { name: 'Services', id: 'services' },
+    { name: 'Solutions', id: 'content' },
+    { name: 'Demo', id: 'demo' },
+    { name: 'Contact', id: 'enquiry' }
+  ];
+
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b transition-all duration-300 ${scrolled ? 'h-14' : 'h-16'}`}>
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 h-full">
-        <div className="flex items-center justify-between h-full">
-          <div className="flex items-center space-x-2">
-            <Car className={`${scrolled ? 'h-6 w-6' : 'h-8 w-8'} text-slate-900 transition-all duration-300`} />
-            <span className={`${scrolled ? 'text-lg' : 'text-xl'} font-bold text-slate-900 transition-all duration-300`}>AutoLab</span>
+    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'py-2' : 'py-4'}`}>
+      {/* Gradient background with blur */}
+      <div className="absolute inset-0 bg-white/80 backdrop-blur-md shadow-sm border-b border-slate-200/50"></div>
+      
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="flex items-center justify-between">
+          {/* Logo */}
+          <div className="flex items-center space-x-3">
+            <div className="bg-gradient-to-br from-blue-600 to-blue-800 p-2 rounded-lg shadow-md">
+              <Car className="h-5 w-5 text-white" />
+            </div>
+            <div className="flex flex-col">
+              <span className="font-bold text-xl text-slate-900">AutoLab</span>
+              <span className="text-xs text-slate-500 -mt-1">Automotive Management</span>
+            </div>
           </div>
 
-          <nav className="hidden md:flex items-center space-x-6">
-            <button onClick={() => scrollToSection('services')} className="text-slate-600 hover:text-slate-900 transition-colors font-medium">
-              Services
-            </button>
-            <button onClick={() => scrollToSection('how-it-works')} className="text-slate-600 hover:text-slate-900 transition-colors font-medium">
-              How It Works
-            </button>
-            <button onClick={() => scrollToSection('demo')} className="text-slate-600 hover:text-slate-900 transition-colors font-medium">
-              Demo
-            </button>
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center space-x-1">
+            {navItems.map((item, index) => (
+              <button 
+                key={index}
+                onClick={() => scrollToSection(item.id)} 
+                className={`px-4 py-2 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-all font-medium ${index === navItems.length - 1 ? 'mr-2' : ''}`}
+              >
+                {item.name}
+              </button>
+            ))}
             <Button 
               onClick={() => scrollToSection('enquiry')} 
-              className="bg-slate-900 hover:bg-slate-800 shadow-md hover:shadow-lg transition-all"
-              size={scrolled ? "sm" : "default"}
+              className="bg-gradient-to-r from-blue-600 to-blue-800 hover:from-blue-700 hover:to-blue-900 text-white shadow-md hover:shadow-lg transition-all px-6"
+              size={scrolled ? "default" : "lg"}
             >
-              Book Your Demo
+              Book a Demo
+              <ChevronRight className="ml-1 h-4 w-4" />
             </Button>
           </nav>
 
+          {/* Mobile menu button */}
           <button
-            className="md:hidden"
+            className="md:hidden p-2 rounded-lg hover:bg-slate-100 transition-colors"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Toggle menu"
           >
-            <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              {mobileMenuOpen ? (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              ) : (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              )}
-            </svg>
+            {mobileMenuOpen ? (
+              <X className="h-6 w-6 text-slate-700" />
+            ) : (
+              <Menu className="h-6 w-6 text-slate-700" />
+            )}
           </button>
         </div>
 
+        {/* Mobile Navigation */}
         {mobileMenuOpen && (
-          <div className="md:hidden py-3 space-y-2 border-t absolute left-0 right-0 bg-white shadow-lg">
-            <button onClick={() => scrollToSection('services')} className="block w-full text-left px-4 py-2 text-slate-600 hover:text-slate-900 hover:bg-slate-50">
-              Services
-            </button>
-            <button onClick={() => scrollToSection('how-it-works')} className="block w-full text-left px-4 py-2 text-slate-600 hover:text-slate-900 hover:bg-slate-50">
-              How It Works
-            </button>
-            <button onClick={() => scrollToSection('demo')} className="block w-full text-left px-4 py-2 text-slate-600 hover:text-slate-900 hover:bg-slate-50">
-              Demo
-            </button>
-            <div className="px-4 pt-2 pb-3">
-              <Button onClick={() => scrollToSection('enquiry')} className="w-full bg-slate-900 hover:bg-slate-800">
-                Book Your Demo
+          <div className="md:hidden py-4 space-y-1 absolute left-0 right-0 top-full bg-white shadow-lg rounded-b-lg border-t border-slate-100 mt-2 overflow-hidden">
+            {navItems.map((item, index) => (
+              <button 
+                key={index}
+                onClick={() => scrollToSection(item.id)} 
+                className="flex w-full text-left px-6 py-3 text-slate-700 hover:text-slate-900 hover:bg-slate-50 transition-colors"
+              >
+                <span>{item.name}</span>
+                <ChevronRight className="ml-auto h-5 w-5 text-slate-400" />
+              </button>
+            ))}
+            <div className="px-4 pt-3 pb-4">
+              <Button 
+                onClick={() => scrollToSection('enquiry')} 
+                className="w-full bg-gradient-to-r from-blue-600 to-blue-800 hover:from-blue-700 hover:to-blue-900 text-white py-6"
+              >
+                Book a Demo
+                <ChevronRight className="ml-1 h-4 w-4" />
               </Button>
             </div>
           </div>

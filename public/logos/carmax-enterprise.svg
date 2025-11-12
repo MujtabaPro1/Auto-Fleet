@@ -1,0 +1,6 @@
+<svg width="120" height="40" viewBox="0 0 120 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M10 10L30 10L20 30L10 10Z" fill="#F59E0B"/>
+  <path d="M35 15H110V25H35V15Z" fill="#F59E0B"/>
+  <text x="15" y="25" font-family="Arial" font-size="10" fill="white">CM</text>
+  <text x="40" y="22" font-family="Arial" font-size="8" font-weight="bold" fill="white">CARMAX ENTERPRISE</text>
+</svg>

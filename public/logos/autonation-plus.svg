@@ -1,0 +1,6 @@
+<svg width="120" height="40" viewBox="0 0 120 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect x="10" y="10" width="20" height="20" rx="4" fill="#10B981"/>
+  <path d="M35 15H110V25H35V15Z" fill="#10B981"/>
+  <text x="15" y="25" font-family="Arial" font-size="10" fill="white">A+</text>
+  <text x="40" y="22" font-family="Arial" font-size="8" font-weight="bold" fill="white">AUTONATION PLUS</text>
+</svg>

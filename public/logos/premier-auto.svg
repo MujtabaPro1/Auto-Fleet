@@ -1,0 +1,6 @@
+<svg width="120" height="40" viewBox="0 0 120 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M10 10H30V30H10V10Z" fill="#2563EB"/>
+  <path d="M35 15H110V25H35V15Z" fill="#2563EB"/>
+  <text x="15" y="25" font-family="Arial" font-size="10" fill="white">PA</text>
+  <text x="40" y="22" font-family="Arial" font-size="8" font-weight="bold" fill="white">PREMIER AUTO GROUP</text>
+</svg>

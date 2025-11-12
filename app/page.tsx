@@ -6,9 +6,9 @@ import VideoSection from '@/components/VideoSection';
 import EnquiryForm from '@/components/EnquiryForm';
 import Footer from '@/components/Footer';
 import ContentSection from '@/components/Content';
+import TestimonialsSection from '@/components/TestimonialsSection';
 import { useState, useEffect } from 'react';
 import { FeatureHighlightsSection } from '@/components/FeatureHighlightsSection';
-import { Track } from '@radix-ui/react-slider';
 
 const featuresData = [
   {
@@ -138,8 +138,10 @@ export default function Home() {
         }}
         />
         {/* HowWeDoItSection is hidden as per requirements */}
-        {USP()}
+      
         <VideoSection />
+        {USP()}
+        {/* <TestimonialsSection /> */}
         <EnquiryForm />
 
         {/* Back to top floating button */}
