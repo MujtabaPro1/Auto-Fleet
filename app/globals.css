@@ -85,3 +85,10 @@
   background-image: linear-gradient(to right, rgb(226 232 240 / 0.5) 1px, transparent 1px),
     linear-gradient(to bottom, rgb(226 232 240 / 0.5) 1px, transparent 1px);
 }
+
+@keyframes fadeInOut {
+  0% { opacity: 0; transform: translateY(-20px); }
+  10% { opacity: 1; transform: translateY(0); }
+  90% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(-20px); }
+}

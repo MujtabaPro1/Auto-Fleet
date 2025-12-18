@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
@@ -11,100 +11,109 @@ import { Slider } from "@/components/ui/slider";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { cn } from "@/lib/utils";
 
-// Mock data for cars
-const CARS = [
-  {
-    id: 1,
-    name: "2023 Mercedes-Benz S-Class",
-    image: "/no-image.png",
-    currentPrice: 85000,
-    highestBid: 87500,
-    lowestBid: 82000,
-    endTime: new Date(Date.now() + 3600000 * 24), // 24 hours from now
-    bids: [
-      { id: 1, user: "User123", amount: 87500, time: "2 hours ago" },
-      { id: 2, user: "User456", amount: 86000, time: "3 hours ago" },
-      { id: 3, user: "User789", amount: 85000, time: "5 hours ago" },
-    ],
-  },
-  {
-    id: 2,
-    name: "2022 BMW 7 Series",
-    image: "/no-image.png",
-    currentPrice: 78000,
-    highestBid: 80000,
-    lowestBid: 76500,
-    endTime: new Date(Date.now() + 3600000 * 48), // 48 hours from now
-    bids: [
-      { id: 1, user: "User234", amount: 80000, time: "1 hour ago" },
-      { id: 2, user: "User567", amount: 79000, time: "4 hours ago" },
-      { id: 3, user: "User890", amount: 78000, time: "6 hours ago" },
-    ],
-  },
-  {
-    id: 3,
-    name: "2023 Audi A8",
-    image: "/no-image.png",
-    currentPrice: 82000,
-    highestBid: 84000,
-    lowestBid: 80000,
-    endTime: new Date(Date.now() + 3600000 * 12), // 12 hours from now
-    bids: [
-      { id: 1, user: "User345", amount: 84000, time: "30 minutes ago" },
-      { id: 2, user: "User678", amount: 83000, time: "2 hours ago" },
-      { id: 3, user: "User901", amount: 82000, time: "5 hours ago" },
-    ],
-  },
-  {
-    id: 4,
-    name: "2022 Lexus LS",
-    image: "/no-image.png",
-    currentPrice: 75000,
-    highestBid: 77000,
-    lowestBid: 73000,
-    endTime: new Date(Date.now() + 3600000 * 36), // 36 hours from now
-    bids: [
-      { id: 1, user: "User456", amount: 77000, time: "1 hour ago" },
-      { id: 2, user: "User789", amount: 76000, time: "3 hours ago" },
-      { id: 3, user: "User012", amount: 75000, time: "7 hours ago" },
-    ],
-  },
-  {
-    id: 5,
-    name: "2023 Porsche Panamera",
-    image: "/no-image.png",
-    currentPrice: 110000,
-    highestBid: 115000,
-    lowestBid: 108000,
-    endTime: new Date(Date.now() + 3600000 * 18), // 18 hours from now
-    bids: [
-      { id: 1, user: "User567", amount: 115000, time: "45 minutes ago" },
-      { id: 2, user: "User890", amount: 112000, time: "2 hours ago" },
-      { id: 3, user: "User123", amount: 110000, time: "4 hours ago" },
-    ],
-  },
-  {
-    id: 6,
-    name: "2022 Tesla Model S",
-    image: "/no-image.png",
-    currentPrice: 90000,
-    highestBid: 92500,
-    lowestBid: 88000,
-    endTime: new Date(Date.now() + 3600000 * 30), // 30 hours from now
-    bids: [
-      { id: 1, user: "User678", amount: 92500, time: "2 hours ago" },
-      { id: 2, user: "User901", amount: 91000, time: "5 hours ago" },
-      { id: 3, user: "User234", amount: 90000, time: "8 hours ago" },
-    ],
-  },
+// Car data from images in public/cars folder
+// Function to parse car details from filename
+const parseCarDetails = (filename: string) => {
+  // Remove file extension
+  const nameWithoutExtension = filename.replace(/\.jpeg$|\.jpg$/i, '');
+  
+  // Split by hyphens
+  const parts = nameWithoutExtension.split('-');
+  
+  // Extract make, model and year
+  const make = parts[0];
+  const year = parts[parts.length - 1];
+  
+  // Extract model (everything between make and year)
+  const model = parts.slice(1, parts.length - 1).join(' ');
+  
+  return {
+    make,
+    model,
+    year,
+    fullName: `${year} ${make} ${model}`
+  };
+};
+
+// Car image filenames from the public/cars folder
+const CAR_IMAGES = [
+  "Dodge-Charger-SXT-2019.jpeg",
+  "Genesis-G70-2023.jpeg",
+  "Hyundai-Santa-Fe-2024.jpeg",
+  "Isuzu-DMAX-2025.jpeg",
+  "Mitsubishi-L200-2023.jpeg",
+  "Nissan-Armada-2021.jpeg",
+  "Nissan-Pathfinder-2015.jpeg",
+  "Peugeot-3008-2023.jpeg",
+  "Tesla-Mode-Y-2024.jpeg",
+  "Toyota-Land-Cruiser-2025.jpeg",
+  "Volkswagen-Atlas-2018.jpeg"
 ];
+
+// Generate car data from images
+const CARS = CAR_IMAGES.map((image, index) => {
+  const carDetails = parseCarDetails(image);
+  const basePrice = 70000 + Math.floor(Math.random() * 50000);
+  const highestBid = basePrice + Math.floor(Math.random() * 5000);
+  const lowestBid = basePrice - Math.floor(Math.random() * 3000);
+  
+  // Random hours for auction end time (between 12 and 48 hours)
+  const hoursRemaining = 12 + Math.floor(Math.random() * 36);
+  
+  // Generate random bids
+  const bidCount = 3;
+  const bids = [];
+  for (let i = 0; i < bidCount; i++) {
+    const amount = i === 0 ? highestBid : (i === bidCount - 1 ? basePrice : basePrice + Math.floor(Math.random() * (highestBid - basePrice)));
+    const hoursAgo = i === 0 ? Math.floor(Math.random() * 2) + 1 : Math.floor(Math.random() * 6) + 2;
+    bids.push({
+      id: i + 1,
+      user: `User${Math.floor(Math.random() * 900) + 100}`,
+      amount,
+      time: `${hoursAgo} ${hoursAgo === 1 ? 'hour' : 'hours'} ago`
+    });
+  }
+  
+  // Sort bids by amount in descending order
+  bids.sort((a, b) => b.amount - a.amount);
+  
+  return {
+    id: index + 1,
+    name: carDetails.fullName,
+    image: `/cars/${image}`,
+    currentPrice: basePrice,
+    highestBid,
+    lowestBid,
+    endTime: new Date(Date.now() + 360000 * hoursRemaining),
+    bids
+  };
+});
+
+// Extract unique brands and years from car data
+const extractBrands = () => {
+  const brands = new Set<string>();
+  CAR_IMAGES.forEach(image => {
+    const details = parseCarDetails(image);
+    brands.add(details.make);
+  });
+  return Array.from(brands);
+};
+
+const extractYears = () => {
+  const years = new Set<string>();
+  CAR_IMAGES.forEach(image => {
+    const details = parseCarDetails(image);
+    years.add(details.year);
+  });
+  return Array.from(years).sort((a, b) => parseInt(b) - parseInt(a)); // Sort descending
+};
 
 // Filter options
 const FILTER_OPTIONS = {
-  brands: ["Mercedes-Benz", "BMW", "Audi", "Lexus", "Porsche", "Tesla"],
-  years: ["2023", "2022", "2021", "2020", "2019"],
+  brands: extractBrands(),
+  years: extractYears(),
   priceRange: [50000, 150000],
-  bodyTypes: ["Sedan", "SUV", "Coupe", "Convertible"],
+  bodyTypes: ["Sedan", "SUV", "Pickup", "Crossover"],
 };
 
 export default function AuctionDemo() {
@@ -114,18 +123,41 @@ export default function AuctionDemo() {
   const [priceRange, setPriceRange] = useState([50000, 120000]);
   const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
   const [selectedYears, setSelectedYears] = useState<string[]>([]);
+  const [currentTime, setCurrentTime] = useState<Date>(new Date());
+  const [showSuccessMessage, setShowSuccessMessage] = useState<boolean>(false);
+  const [successMessage, setSuccessMessage] = useState<string>('');
 
-  // Function to format time remaining
+  // Update the current time every second for real-time countdown
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentTime(new Date());
+    }, 1000);
+    
+    return () => clearInterval(timer);
+  }, []);
+  
+  // Auto-hide success message after 5 seconds
+  useEffect(() => {
+    if (showSuccessMessage) {
+      const timer = setTimeout(() => {
+        setShowSuccessMessage(false);
+      }, 5000);
+      
+      return () => clearTimeout(timer);
+    }
+  }, [showSuccessMessage]);
+
+  // Function to format time remaining with real-time updates
   const formatTimeRemaining = (endTime: Date) => {
-    const now = new Date();
-    const diff = endTime.getTime() - now.getTime();
+    const diff = endTime.getTime() - currentTime.getTime();
     
     if (diff <= 0) return "Auction ended";
     
     const hours = Math.floor(diff / (1000 * 60 * 60));
     const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
     
-    return `${hours}h ${minutes}m remaining`;
+    return `${hours}h ${minutes}m ${seconds}s remaining`;
   };
 
   // Function to handle placing a bid
@@ -153,6 +185,10 @@ export default function AuctionDemo() {
     
     setCars(updatedCars);
     setSelectedCar(null);
+    
+    // Show success message
+    setSuccessMessage(`Your bid of AED ${bidAmount.toLocaleString()} for ${selectedCar.name} was placed successfully!`);
+    setShowSuccessMessage(true);
   };
 
   // Function to toggle brand filter
@@ -175,6 +211,38 @@ export default function AuctionDemo() {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      {/* Success Message */}
+      {showSuccessMessage && (
+        <div 
+          className="fixed top-4 right-4 z-50 bg-green-100 border-l-4 border-green-500 text-green-700 p-4 rounded shadow-md"
+          style={{
+            animation: 'fadeInOut 5s ease-in-out',
+            opacity: showSuccessMessage ? 1 : 0,
+            transition: 'opacity 0.5s ease-in-out'
+          }}
+        >
+          <div className="flex items-center">
+            <div className="py-1">
+              <svg className="w-6 h-6 mr-4 text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+            <div>
+              <p className="font-bold">Success!</p>
+              <p>{successMessage}</p>
+            </div>
+            <button 
+              onClick={() => setShowSuccessMessage(false)}
+              className="ml-auto text-gray-400 hover:text-gray-800"
+            >
+              <svg className="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      )}
+      
       {/* Header */}
       <header className="bg-white shadow-sm">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
@@ -291,7 +359,7 @@ export default function AuctionDemo() {
                       className="w-full h-48 object-cover"
                     />
                     <div className="absolute top-2 right-2">
-                      <Badge variant="secondary" className="bg-red-500 text-white font-medium">
+                      <Badge variant="secondary" className={`${car.endTime.getTime() - currentTime.getTime() <= 3600000 ? 'bg-red-600' : 'bg-red-500'} text-white font-medium`}>
                         {formatTimeRemaining(car.endTime)}
                       </Badge>
                     </div>
