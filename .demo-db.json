@@ -1,0 +1,41 @@
+{
+  "users": [
+    {
+      "id": "usr_8eeb0dc285044376",
+      "name": "Test",
+      "phone": "971588258739",
+      "email": "mujtabaayub@hotmail.com",
+      "createdAt": "2025-12-24T20:51:51.119Z",
+      "updatedAt": "2025-12-24T20:52:07.755Z",
+      "emiratesIdUrl": "/demo-uploads/emirates_usr_8eeb0dc285044376_2bbb3a4b7588dca1.jpg"
+    }
+  ],
+  "cars": [
+    {
+      "id": "car_0a33b4465cbfd92a",
+      "title": "Toyota Landcruiser",
+      "make": "Toyota",
+      "model": "Land Cruiser",
+      "year": 2023,
+      "description": "Testing",
+      "minimumBid": 10000,
+      "status": "IN_AUCTION",
+      "images": [
+        "/demo-uploads/car_car_0a33b4465cbfd92a_ffdb58fdb1e13e35.jpeg"
+      ],
+      "createdAt": "2025-12-24T20:47:39.023Z",
+      "updatedAt": "2025-12-25T06:07:20.648Z",
+      "auctionStartAt": "2025-12-25T06:07:20.627Z",
+      "auctionDurationMinutes": 60
+    }
+  ],
+  "bids": [
+    {
+      "id": "bid_4375d9b9e83331d3",
+      "carId": "car_0a33b4465cbfd92a",
+      "userId": "usr_8eeb0dc285044376",
+      "amount": 10103,
+      "createdAt": "2025-12-24T20:52:10.035Z"
+    }
+  ]
+}
